@@ -261,8 +261,10 @@ internal static class ActionUpdater
 			return false;
 		}
 
-		// Duncan's fork: pause all actions while automatically dodging a mechanic.
-		if (MechanicDodger.IsDodging)
+		// Duncan's fork: pause all actions while automatically dodging a mechanic,
+		// while holding a gaze look-away (a cast would snap facing back to the
+		// boss via auto-face-target), or while frozen by a do-nothing mechanic.
+		if (MechanicDodger.IsDodging || MechanicDodger.IsFrozen || GazeHandler.IsLookingAway)
 		{
 			return false;
 		}

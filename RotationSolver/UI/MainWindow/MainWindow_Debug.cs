@@ -952,7 +952,14 @@ public partial class MainWindow
 		ImGui.Text($"BMRIsMoving: {DataCenter.BMRIsMoving}");
 		ImGui.Text($"Dodger enabled: {Service.Config.DodgeMechanics}");
 		ImGui.Text($"Dodger active (suppressing actions): {Updaters.MechanicDodger.IsDodging}");
+		ImGui.Text($"Dodger frozen for do-nothing mechanic: {Updaters.MechanicDodger.IsFrozen}");
 		ImGui.Text($"vnavmesh IPC enabled: {IPC.VNavmesh_IPCSubscriber.IsEnabled}");
+		ImGui.Text($"Gaze look-away enabled: {Service.Config.GazeLookAway}");
+		ImGui.Text($"Gaze active (BMR forbidden directions): {DataCenter.BMRForbiddenDirectionsCount}");
+		ImGui.Text($"Looking away (suppressing actions): {Updaters.GazeHandler.IsLookingAway} ({Updaters.GazeHandler.GazeSourceName})");
+		ImGui.Text($"BMR special mode: {DataCenter.BMRSpecialModeType} in {DataCenter.BMRSpecialModeIn:F1}s");
+		ImGui.Text($"BMR arena bounds: {(DataCenter.BMRHasArenaBounds ? $"r={DataCenter.BMRArenaRadius:F0}" : "unknown")}");
+		ImGui.Text($"BMR max cast time: {(DataCenter.BMRMaxCastTime < float.MaxValue ? $"{DataCenter.BMRMaxCastTime:F1}s" : "unknown")}");
 	}
 
 	private static void DrawAction(ActionID id, string type)

@@ -40,5 +40,30 @@ internal static class BMRInfo_IPCSubscriber
 	[EzIPC("Movement.IsMoving", true)]
 	internal static readonly Func<bool>? IsMoving;
 
+	/// <summary>
+	/// Number of active gaze/directional hazards (BossMod AIHints.ForbiddenDirections).
+	/// Null when the BMR version predates the endpoint (added in BMR 7.5.0.20).
+	/// </summary>
+	[EzIPC("Hints.ForbiddenDirectionsCount", true)]
+	internal static readonly Func<int>? ForbiddenDirectionsCount;
+
+	/// <summary>
+	/// Center of the current pathfind arena (XZ), if BMR exposes it.
+	/// </summary>
+	[EzIPC("Hints.ArenaCenter", true)]
+	internal static readonly Func<Vector2>? ArenaCenter;
+
+	/// <summary>
+	/// Radius of the current pathfind arena, if BMR exposes it.
+	/// </summary>
+	[EzIPC("Hints.ArenaRadius", true)]
+	internal static readonly Func<float>? ArenaRadius;
+
+	/// <summary>
+	/// Maximum time the player can keep casting before needing to move.
+	/// </summary>
+	[EzIPC("Hints.MaxCastTime", true)]
+	internal static readonly Func<float>? MaxCastTime;
+
 	internal static void Dispose() => IPCSubscriber_Common.DisposeAll(_disposalTokens);
 }

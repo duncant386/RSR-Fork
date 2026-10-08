@@ -87,10 +87,34 @@ internal static class BossModUpdater
 			DataCenter.BMRIsFixedDashSafe = BMRTimeline_IPCSubscriber.IsFixedDashSafe != null
 				? (from, to) => BMRTimeline_IPCSubscriber.IsFixedDashSafe.Invoke(from, to)
 				: null;
+
+			// Duncan's fork: gaze / arena / cast-time hints (BMR >= 7.5.0.20).
+			// Each Invoke is individually guarded: a missing endpoint just
+			// leaves the safe default instead of throwing.
+			DataCenter.BMRForbiddenDirectionsCount = SafeInvoke(BMRInfo_IPCSubscriber.ForbiddenDirectionsCount, 0);
+			DataCenter.BMRMaxCastTime = SafeInvoke(BMRInfo_IPCSubscriber.MaxCastTime, float.MaxValue);
+
+			var arenaCenter = SafeInvokeNullable(BMRInfo_IPCSubscriber.ArenaCenter);
+			var arenaRadius = SafeInvoke(BMRInfo_IPCSubscriber.ArenaRadius, float.MaxValue);
+			DataCenter.BMRHasArenaBounds = arenaCenter.HasValue && arenaRadius > 0f && arenaRadius < float.MaxValue;
+			DataCenter.BMRArenaCenter = arenaCenter ?? default;
+			DataCenter.BMRArenaRadius = arenaRadius;
 		}
 		catch
 		{
 			DataCenter.ResetBmrData();
 		}
+	}
+
+	private static T SafeInvoke<T>(Func<T>? func, T fallback)
+	{
+		if (func == null) return fallback;
+		try { return func(); } catch { return fallback; }
+	}
+
+	private static T? SafeInvokeNullable<T>(Func<T>? func) where T : struct
+	{
+		if (func == null) return null;
+		try { return func(); } catch { return null; }
 	}
 }

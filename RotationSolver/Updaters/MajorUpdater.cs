@@ -207,6 +207,17 @@ internal static class MajorUpdater
 			LogOnce("(RSRActivatedCore): MechanicDodger.Update Exception", ex);
 		}
 
+		// Duncan's fork: gaze look-away runs right after the dodger so it can
+		// see whether a dodge is in progress (movement wins over turning).
+		try
+		{
+			GazeHandler.Update();
+		}
+		catch (Exception ex)
+		{
+			LogOnce("(RSRActivatedCore): GazeHandler.Update Exception", ex);
+		}
+
 		try
 		{
 			StateUpdater.UpdateState();

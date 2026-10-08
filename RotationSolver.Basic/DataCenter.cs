@@ -2836,6 +2836,34 @@ internal static class DataCenter
 	public static Func<Vector3, Vector3, bool>? BMRIsFixedDashSafe { get; set; }
 
 	/// <summary>
+	/// Number of active gaze/directional hazards reported by BossModReborn
+	/// (<c>Hints.ForbiddenDirectionsCount</c>). Zero when BMR is unavailable or
+	/// the endpoint is not bound (BMR older than 7.5.0.20).
+	/// </summary>
+	public static int BMRForbiddenDirectionsCount { get; set; }
+
+	/// <summary>
+	/// Center (XZ) of BMR's current pathfind arena, when exposed.
+	/// </summary>
+	public static Vector2 BMRArenaCenter { get; set; }
+
+	/// <summary>
+	/// Radius of BMR's current pathfind arena. <see cref="float.MaxValue"/> when unknown.
+	/// </summary>
+	public static float BMRArenaRadius { get; set; } = float.MaxValue;
+
+	/// <summary>
+	/// True when BMR exposed usable arena bounds this tick.
+	/// </summary>
+	public static bool BMRHasArenaBounds { get; set; }
+
+	/// <summary>
+	/// Maximum time the player can keep casting before needing to move
+	/// (<c>Hints.MaxCastTime</c>). <see cref="float.MaxValue"/> when unknown.
+	/// </summary>
+	public static float BMRMaxCastTime { get; set; } = float.MaxValue;
+
+	/// <summary>
 	/// The most recently polled set of upcoming planned actions from BossMod's Cooldown Planner,
 	/// wired up by BMRPlanUpdater. Empty when no plan is active or BossModReborn is unavailable.
 	/// </summary>
@@ -2941,6 +2969,11 @@ internal static class DataCenter
 		BMRIsPositionSafe = null;
 		BMRIsDashSafe = null;
 		BMRIsFixedDashSafe = null;
+		BMRForbiddenDirectionsCount = 0;
+		BMRArenaCenter = default;
+		BMRArenaRadius = float.MaxValue;
+		BMRHasArenaBounds = false;
+		BMRMaxCastTime = float.MaxValue;
 	}
 
 	/// <summary>

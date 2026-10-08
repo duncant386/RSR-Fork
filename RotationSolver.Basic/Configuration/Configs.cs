@@ -780,9 +780,14 @@ internal partial class Configs : IPluginConfiguration
 	private static readonly bool _useBMRTimeline = false;
 
 	[ConditionBool, UI("Dodge mechanics automatically (BossModReborn + vnavmesh)",
-		Description = "When enabled, and BossModReborn and vnavmesh are loaded, RSR will move you out of dangerous AoEs using BossModReborn's radar data and pause actions while dodging. Only acts when you are standing still in danger; it never fights your own movement.",
+		Description = "When enabled, and BossModReborn and vnavmesh are loaded, RSR will move you out of dangerous AoEs using BossModReborn's radar data and pause actions while dodging. Only acts when you are standing still in danger; it never fights your own movement. Also holds still (and pauses actions) during do-nothing mechanics like Pyretic / NoMovement instead of dodging into death.",
 		Filter = AutoActionUsage)]
 	private static readonly bool _dodgeMechanics = false;
+
+	[ConditionBool, UI("Look away from gaze mechanics automatically (BossModReborn)",
+		Description = "When enabled, and BossModReborn is loaded, RSR will turn your character away from the current target while BossModReborn reports an active gaze hazard, and pause actions while turned (casting would snap your facing back to the boss). Heuristic: the gaze source is assumed to be your hard target. BMR only exposes the hazard count, not the forbidden arcs, so must-face (look-towards) mechanics are indistinguishable - disable this toggle for those fights.",
+		Filter = AutoActionUsage)]
+	private static readonly bool _gazeLookAway = false;
 
 	[UI("Seconds before raidwide to use area mitigation", Parent = nameof(UseBmrTimeline))]
 	[Range(1, 15, ConfigUnitType.Seconds, 0.5f)]
