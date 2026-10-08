@@ -1,0 +1,29 @@
+{
+  "Author": "Duncan",
+  "Name": "Rotation Solver Reborn (Duncan's Fork)",
+  "InternalName": "RotationSolverDuncan",
+  "RepoUrl": "https://github.com/FFXIV-CombatReborn/RotationSolverReborn",
+  "Description": "Analyses combat information every frame and finds the best action.\n\nDuncan's fork: adds automatic mechanic dodging driven by BossModReborn's radar (moves out of AoEs via vnavmesh, pauses actions while dodging). Based on Rotation Solver Reborn by The Combat Reborn Team.",
+  "ApplicableVersion": "any",
+  "DalamudApiLevel": 15,
+  "TestingDalamudApiLevel": 15,
+  "Tags": [
+    "combat",
+    "rotation",
+    "auto",
+    "solver",
+    "pve",
+    "pvp"
+  ],
+  "CategoryTags": [
+    "jobs"
+  ],
+  "LoadRequiredState": 0,
+  "LoadSync": false,
+  "CanUnloadAsync": false,
+  "LoadPriority": 0,
+  "IsTestingExclusive": false,
+  "IconUrl": "https://raw.githubusercontent.com/FFXIV-CombatReborn/RebornAssets/main/IconAssets/RSR_Icon.png",
+  "Punchline": "Analyses combat information every frame and finds the best action.",
+  "AcceptsFeedback": true
+}
